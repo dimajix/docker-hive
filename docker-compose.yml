@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+
+  hive-client:
+    hostname: hive-client
+    container_name: dmx-hive-client
+    image: dimajix/hive:latest
+    build:
+      context:  .
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    env_file:
+      - docker-compose.env
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+
+  hive-metastore:
+    hostname: hive-metastore
+    container_name: dmx-hive-metastore
+    image: dimajix/hive:latest
+    command: metastore
+    env_file:
+      - docker-compose.env
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+
+networks:
+  default:
+    external:
+      name: dimajix
+

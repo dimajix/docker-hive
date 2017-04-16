@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?><!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--><configuration>
+  <!-- Metastore params -->
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>[% HIVE_WAREHOUSE %]</value>
+    <description>location of default database for the warehouse</description>
+  </property>
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://[% HIVE_METASTORE_HOST %]:[% HIVE_METASTORE_PORT %]</value>
+    <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.</description>
+  </property>
+  <property>
+    <name>hive.metastore.port</name>
+    <value>[% HIVE_METASTORE_PORT %]</value>
+    <description>Hive metastore listener port</description>
+  </property>
+  <property>
+    <name>hive.metastore.sasl.enabled</name>
+    <value>false</value>
+    <description>If true, the metastore Thrift interface will be secured with SASL. Clients must authenticate with Kerberos.</description>
+  </property>
+
+  <!-- Backend DB -->
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>[% HIVE_JDO_DRIVER %]</value>
+    <description>Driver class name for a JDBC metastore</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>[% HIVE_JDO_CONNECTION %]</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>[% HIVE_JDO_USERNAME %]</value>
+    <description>Username to use against metastore database</description>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>[% HIVE_JDO_PASSWORD %]</value>
+    <description>Password to use against metastore database</description>
+  </property>
+
+  <!-- Hive Execution Parameters -->
+  <property>
+    <name>hive.exec.scratchdir</name>
+    <value>/tmp/hive</value>
+    <description>HDFS root scratch dir for Hive jobs which gets created with write all (733) permission. For each connecting user, an HDFS scratch dir: ${hive.exec.scratchdir}/&lt;username&gt; is created, with ${hive.scratch.dir.permission}.</description>
+  </property>
+  <property>
+    <name>hive.exec.local.scratchdir</name>
+    <value>${system:java.io.tmpdir}/${system:user.name}</value>
+    <description>Local scratch space for Hive jobs</description>
+  </property>
+  <property>
+    <name>hive.exec.dynamic.partition</name>
+    <value>true</value>
+    <description>Whether or not to allow dynamic partitions in DML/DDL.</description>
+  </property>
+  <property>
+    <name>hive.exec.dynamic.partition.mode</name>
+    <value>strict</value>
+    <description>
+      In strict mode, the user must specify at least one static partition
+      in case the user accidentally overwrites all partitions.
+      In nonstrict mode all partitions are allowed to be dynamic.
+    </description>
+  </property>
+  <property>
+    <name>hive.security.authorization.enabled</name>
+    <value>false</value>
+    <description>enable or disable the Hive client authorization</description>
+  </property>
+  <property>
+    <name>hive.security.metastore.authorization.auth.reads</name>
+    <value>true</value>
+    <description>If this is true, metastore authorizer authorizes read actions on database, table</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.bind.host</name>
+    <value/>
+    <description>Bind host on which to run the HiveServer2 Thrift service.</description>
+  </property>
+  <property>
+    <name>hive.server2.webui.host</name>
+    <value>0.0.0.0</value>
+    <description>The host address the HiveServer2 WebUI will listen on</description>
+  </property>
+  <property>
+    <name>hive.server2.webui.port</name>
+    <value>10002</value>
+    <description>The port the HiveServer2 WebUI will listen on. This can beset to 0 or a negative integer to disable the web UI</description>
+  </property>
+  <property>
+    <name>hive.server2.webui.max.threads</name>
+    <value>50</value>
+    <description>The max HiveServer2 WebUI threads</description>
+  </property>
+  <property>
+    <name>hive.server2.webui.max.historic.queries</name>
+    <value>25</value>
+    <description>The maximum number of past queries to show in HiverSever2 WebUI.</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.http.port</name>
+    <value>10001</value>
+    <description>Port number of HiveServer2 Thrift interface when hive.server2.transport.mode is 'http'.</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.http.cookie.auth.enabled</name>
+    <value>true</value>
+    <description>When true, HiveServer2 in HTTP transport mode, will use cookie based authentication mechanism.</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.port</name>
+    <value>10000</value>
+    <description>Port number of HiveServer2 Thrift interface when hive.server2.transport.mode is 'binary'.</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.sasl.qop</name>
+    <value>auth</value>
+    <description>
+      Expects one of [auth, auth-int, auth-conf].
+      Sasl QOP value; set it to one of following values to enable higher levels of
+      protection for HiveServer2 communication with clients.
+      Setting hadoop.rpc.protection to a higher level than HiveServer2 does not
+      make sense in most situations. HiveServer2 ignores hadoop.rpc.protection in favor
+      of hive.server2.thrift.sasl.qop.
+        "auth" - authentication only (default)
+        "auth-int" - authentication plus integrity protection
+        "auth-conf" - authentication plus integrity and confidentiality protection
+      This is applicable only if HiveServer2 is configured to use Kerberos authentication.
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.authentication</name>
+    <value>NONE</value>
+    <description>
+      Expects one of [nosasl, none, ldap, kerberos, pam, custom].
+      Client authentication types.
+        NONE: no authentication check
+        LDAP: LDAP/AD based authentication
+        KERBEROS: Kerberos/GSSAPI authentication
+        CUSTOM: Custom authentication provider
+                (Use with property hive.server2.custom.authentication.class)
+        PAM: Pluggable authentication module
+        NOSASL:  Raw transport
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.allow.user.substitution</name>
+    <value>true</value>
+    <description>Allow alternate user to be specified as part of HiveServer2 open connection request.</description>
+  </property>
+  <property>
+    <name>hive.server2.enable.doAs</name>
+    <value>true</value>
+    <description>
+      Setting this property to true will have HiveServer2 execute
+      Hive operations as the user making the calls to it.
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.table.type.mapping</name>
+    <value>CLASSIC</value>
+    <description>
+      Expects one of [classic, hive].
+      This setting reflects how HiveServer2 will report the table types for JDBC and other
+      client implementations that retrieve the available tables and supported table types
+        HIVE : Exposes Hive's native table types like MANAGED_TABLE, EXTERNAL_TABLE, VIRTUAL_VIEW
+        CLASSIC : More generic types like TABLE and VIEW
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.map.fair.scheduler.queue</name>
+    <value>true</value>
+    <description>
+      If the YARN fair scheduler is configured and HiveServer2 is running in non-impersonation mode,
+      this setting determines the user for fair scheduler queue mapping.
+      If set to true (default), the logged-in user determines the fair scheduler queue
+      for submitted jobs, so that map reduce resource usage can be tracked by user.
+      If set to false, all Hive jobs go to the 'hive' user's queue.
+    </description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.client.user</name>
+    <value>anonymous</value>
+    <description>Username to use against thrift client</description>
+  </property>
+  <property>
+    <name>hive.server2.thrift.client.password</name>
+    <value>anonymous</value>
+    <description>Password to use against thrift client</description>
+  </property>
+  <property>
+    <name>hive.execution.engine</name>
+    <value>mr</value>
+    <description>
+      Expects one of [mr, tez, spark].
+      Chooses execution engine. Options are: mr (Map reduce, default), tez, spark. While MR
+      remains the default engine for historical reasons, it is itself a historical engine
+      and is deprecated in Hive 2 line. It may be removed without further warning.
+    </description>
+  </property>
+  <property>
+    <name>hive.user.install.directory</name>
+    <value>/user/</value>
+    <description>
+      If hive (in tez mode only) cannot find a usable hive jar in "hive.jar.directory",
+      it will upload the hive jar to "hive.user.install.directory/user.name"
+      and use it to run queries.
+    </description>
+  </property>
+</configuration>
