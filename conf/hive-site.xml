@@ -65,11 +65,6 @@
     <description>HDFS root scratch dir for Hive jobs which gets created with write all (733) permission. For each connecting user, an HDFS scratch dir: ${hive.exec.scratchdir}/&lt;username&gt; is created, with ${hive.scratch.dir.permission}.</description>
   </property>
   <property>
-    <name>hive.exec.local.scratchdir</name>
-    <value>${system:java.io.tmpdir}/${system:user.name}</value>
-    <description>Local scratch space for Hive jobs</description>
-  </property>
-  <property>
     <name>hive.exec.dynamic.partition</name>
     <value>true</value>
     <description>Whether or not to allow dynamic partitions in DML/DDL.</description>

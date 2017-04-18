@@ -27,6 +27,22 @@ services:
     environment:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
+    links:
+      - mariadb
+
+  mariadb:
+    hostname: mariadb
+    container_name: dmx-mariadb
+    image: mariadb:latest
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hive
+      - MYSQL_USER=hive
+      - MYSQL_PASSWORD=hive
+    volumes:
+      - /tmp/mariadb:/var/lib/mysql
 
 networks:
   default:
