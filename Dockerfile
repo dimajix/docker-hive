@@ -17,7 +17,7 @@ RUN curl -sL --retry 3 "http://www-us.apache.org/dist/hive/hive-${BUILD_HIVE_VER
  && chown -R root:root ${HIVE_HOME} \
  && mkdir -p ${HIVE_CONF_DIR}
 
-RUN apt-get install -y libmysql-java mariadb-client \
+RUN apt-get install -y --no-install-recommends libmysql-java mariadb-client \
  && ln -s /usr/share/java/mysql-connector-java.jar $HIVE_HOME/lib/mysql-connector-java.jar \
  && apt-get clean
 
