@@ -2,9 +2,9 @@ version: "3"
 
 services:
 
-  hive-client:
-    hostname: hive-client
-    container_name: dmx-hive-client
+  hive-metastore:
+    hostname: hive-metastore
+    container_name: dmx-hive-metastore
     image: dimajix/hive:latest
     build:
       context:  .
@@ -16,19 +16,19 @@ services:
     environment:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
+    links:
+      - mariadb
 
-  hive-metastore:
-    hostname: hive-metastore
-    container_name: dmx-hive-metastore
+  hive-client:
+    hostname: hive-client
+    container_name: dmx-hive-client
     image: dimajix/hive:latest
-    command: metastore
+    command: client
     env_file:
       - docker-compose.env
     environment:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
-    links:
-      - mariadb
 
   mariadb:
     hostname: mariadb

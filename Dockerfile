@@ -34,4 +34,4 @@ COPY conf/ /opt/docker/conf/hive/
 ENV PATH=$PATH:${HIVE_HOME}/bin
 
 ENTRYPOINT ["/opt/docker/bin/entrypoint.sh"]
-CMD ["bash"]
+CMD ["metastore"]

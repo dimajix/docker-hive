@@ -34,6 +34,9 @@ main() {
     metastore)
       start_metastore
       ;;
+    client)
+      hive
+      ;;
     *)
       exec $@
       exit $?
