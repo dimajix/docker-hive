@@ -1,0 +1,35 @@
+# Docker Hive
+
+## Configuration
+
+HDFS_NAMENODE_HOSTNAME=hadoop-namenode
+HDFS_NAMENODE_PORT=8020
+HDFS_DEFAULT_FS=hdfs://hadoop-namenode:8020
+
+HIVE_WAREHOUSE
+HIVE_METASTORE_HOST
+HIVE_METASTORE_PORT=9083
+
+HIVE_JDO_DRIVER=org.apache.derby.jdbc.EmbeddedDriver
+HIVE_JDO_CONNECTION=jdbc:derby:;databaseName=/tmp/metastore_db;create=true
+HIVE_JDO_USERNAME=hive
+HIVE_JDO_PASSWORD=hive
+
+# Deployment
+
+## Minimum Configuration
+
+## MySQL Database
+
+HIVE_JDO_DRIVER=com.mysql.jdbc.Driver
+HIVE_JDO_CONNECTION=jdbc:mysql://mariadb/hive?createDatabaseIfNotExist=true
+HIVE_JDO_USERNAME=hive
+HIVE_JDO_PASSWORD=hive
+
+# Using S3
+
+S3_ENDPOINT
+S3_PROXY_HOST
+S3_PROXY_PORT
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
