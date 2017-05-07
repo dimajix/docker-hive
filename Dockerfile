@@ -18,9 +18,11 @@ RUN curl -sL --retry 3 "http://www-us.apache.org/dist/hive/hive-${BUILD_HIVE_VER
  && mkdir -p ${HIVE_CONF_DIR}
 
 # Download additional JDBC drivers
-RUN apt-get install -y --no-install-recommends libmysql-java mariadb-client \
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends libmysql-java mariadb-client \
  && ln -s /usr/share/java/mysql-connector-java.jar $HIVE_HOME/lib/mysql-connector-java.jar \
- && apt-get clean
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 # Fix support for S3
 RUN ln -s /opt/hadoop/share/hadoop/tools/lib/hadoop-aws-*.jar /opt/hive/lib \
