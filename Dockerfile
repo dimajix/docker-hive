@@ -1,7 +1,7 @@
-FROM dimajix/hadoop:2.8.1
+FROM dimajix/hadoop:2.8.3
 MAINTAINER k.kupferschmidt@dimajix.de
 
-ARG BUILD_HIVE_VERSION=2.1.1
+ARG BUILD_HIVE_VERSION=2.3.2
 
 USER root
 

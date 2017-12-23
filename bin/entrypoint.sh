@@ -13,7 +13,7 @@ check_metadb() {
 create_metadb() {
     olddir=$(pwd)
     cd  ${HIVE_HOME}/scripts/metastore/upgrade/mysql
-    mysql -u${HIVE_JDO_USERNAME} -p${HIVE_JDO_PASSWORD} -h${HIVE_JDO_HOST}  -e "USE hive; SOURCE hive-schema-2.1.0.mysql.sql;"
+    mysql -u${HIVE_JDO_USERNAME} -p${HIVE_JDO_PASSWORD} -h${HIVE_JDO_HOST}  -e "USE hive; SOURCE hive-schema-2.3.0.mysql.sql;"
     result=$?
     cd $olddir
     return $result
